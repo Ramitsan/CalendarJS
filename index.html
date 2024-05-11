@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Calendar</title>
+</head>
+
+<body>
+  <div class="app">
+    <div class="app__wrapper">
+
+      <div class="calendar__container">
+        <div class="popup-mobile">
+          <button class="year-change__button year-change__button--back"></button>
+          <p class="popup-mobile__text">Выберите период</p>
+          <button class="year-change__button year-change__button--close"></button>
+        </div>
+        <div class="calendar calendar--one">
+          <div class="date-change">
+            <div class="date-change__wrapper">
+              <div class="date-change__left">
+                <div class="date-change__inputs">
+                  <span class="date-change__text"><span class="date">дата</span> от</span>
+                  <span class="input-wrap input-wrap--day">
+                    <input class="date-change__input date-change__input--day" type="text" placeholder="дд">
+                    <span class="sizer">дд</span>
+                  </span>
+                  <span class="date-change__dot">.</span>
+                  <span class="input-wrap input-wrap--month">
+                    <input class="date-change__input date-change__input--month" type="text" placeholder="мм">
+                    <span class="sizer">мм</span>
+                  </span>
+
+                  <span class="date-change__dot">.</span>
+                  <span class="input-wrap input-wrap--year">
+                    <input class="date-change__input date-change__input--year" type="text" placeholder="гггг">
+                    <span class="sizer">гггг</span>
+                  </span>
+                </div>
+                <div class="date-change__icon">
+                  <img src="assets/icons/calendar.svg" alt="">
+                </div>
+              </div>
+              <div class="date-change__right hide-element">
+                <div class="tooltip" data-tip="Очистить поле?">
+                  <button class="date-change__button date-change__button--clear"></button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="month-change">
+            <div class="month-change__wrapper">
+              <div class="month-change__content">
+                <button class="month-change__button month-change__button--prev"></button>
+                <div class="month-change__select select">
+                  <div class="select__side"></div>
+                  <div class="month-change__text select__input" tabindex="0">Выберите месяц</div>
+  
+                  <div class="select__side">
+                    <div class="month-change__button month-change__button--open-list"></div>
+                  </div>
+                </div>
+                <button class="month-change__button month-change__button--next"></button>
+              </div>             
+            </div>
+            <div class="select__container select__container--change-month">
+              <div class="select__container-wrap select__container-wrap--month">
+                <div class="select__item select__item--month">Январь</div>
+                <div class="select__item select__item--month">Февраль</div>
+                <div class="select__item select__item--month">Март</div>
+                <div class="select__item select__item--month">Апрель</div>
+                <div class="select__item select__item--month">Май</div>
+                <div class="select__item select__item--month">Июнь</div>
+                <div class="select__item select__item--month">Июль</div>
+                <div class="select__item select__item--month">Август</div>
+                <div class="select__item select__item--month">Сентябрь</div>
+                <div class="select__item select__item--month">Октябрь</div>
+                <div class="select__item select__item--month">Ноябрь</div>
+                <div class="select__item select__item--month">Декабрь</div>
+              </div>
+
+            </div>
+          </div>
+          <div class="year-change">
+            <div class="year-change__wrapper">
+              <div class="year-change__content">
+                <button class="year-change__button year-change__button--prev"></button>
+                <div class="year-change__select select">
+                  <div class="select__side"></div>
+                  <input class="year-change__text  select__input" type="text" placeholder="Выберите год">
+                  <div class="select__side">
+                    <div class="year-change__button year-change__button--open-list"></div>
+                  </div>
+                </div>
+                <button class="year-change__button year-change__button--next"></button>
+              </div>
+            </div>
+
+            <div class="select__container select__container--change-year">
+              <div class="select__container-wrap select__container-wrap--year">
+                <div class="select__item select__item--year">2024</div>
+                <div class="select__item select__item--year">2023</div>
+                <div class="select__item select__item--year">2022</div>
+                <div class="select__item select__item--year">2021</div>
+                <div class="select__item select__item--year">2020</div>
+                <div class="select__item select__item--year">2019</div>
+                <div class="select__item select__item--year">2018</div>
+                <div class="select__item select__item--year">2017</div>
+                <div class="select__item select__item--year">2016</div>
+                <div class="select__item select__item--year">2015</div>
+                <div class="select__item select__item--year">2014</div>
+                <div class="select__item select__item--year">2013</div>
+                <div class="select__item select__item--year">2012</div>
+                <div class="select__item select__item--year">2011</div>
+                <div class="select__item select__item--year">2010</div>
+                <div class="select__item select__item--year">2009</div>
+                <div class="select__item select__item--year">2008</div>
+              </div>
+            </div>
+          </div>
+          <div class="days">
+            <div class="week-days-list">
+              <div class="day week-day">
+                <div class="number">Пн</div>
+              </div>
+              <div class="day week-day">
+                <div class="number">Вт</div>
+              </div>
+              <div class="day week-day">
+                <div class="number">Ср</div>
+              </div>
+              <div class="day week-day">
+                <div class="number">Чт</div>
+              </div>
+              <div class="day week-day">
+                <div class="number">Пт</div>
+              </div>
+              <div class="day week-day">
+                <div class="number">Сб</div>
+              </div>
+              <div class="day week-day">
+                <div class="number">Вс</div>
+              </div>
+            </div>
+            <div class="days-list">
+              <div class="day day--month">
+                <div class="number">1</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">2</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">3</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">4</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">5</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">6</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">7</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">8</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">9</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">10</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">11</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">12</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">13</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">14</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">15</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">16</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">17</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">18</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">19</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">20</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">21</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">22</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">23</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">24</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">25</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">26</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">27</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">28</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">29</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">30</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">31</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="calendar calendar--two">
+          <div class="date-change">
+            <div class="date-change__wrapper">
+              <div class="date-change__left">
+                <div class="date-change__inputs">
+                  <span class="date-change__text"><span class="date">дата</span> до</span>
+                  <span class="input-wrap input-wrap--day">
+                    <input class="date-change__input date-change__input--day" type="text" placeholder="дд">
+                    <span class="sizer">дд</span>
+                  </span>
+                  <span class="date-change__dot">.</span>
+                  <span class="input-wrap input-wrap--month">
+                    <input class="date-change__input date-change__input--month" type="text" placeholder="мм">
+                    <span class="sizer">мм</span>
+                  </span>
+
+                  <span class="date-change__dot">.</span>
+                  <span class="input-wrap input-wrap--year">
+                    <input class="date-change__input date-change__input--year" type="text" placeholder="гггг">
+                    <span class="sizer">гггг</span>
+                  </span>
+                </div>
+                <div class="date-change__icon">
+                  <img src="assets/icons/calendar.svg" alt="">
+                </div>
+              </div>
+              <div class="date-change__right hide-element">
+                <div class="tooltip" data-tip="Очистить поле?">
+                  <button class="date-change__button date-change__button--clear"></button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="month-change">
+            <div class="month-change__wrapper">
+              <div class="month-change__content">
+                <button class="month-change__button month-change__button--prev"></button>
+                <div class="month-change__select select">
+                  <div class="select__side"></div>
+                  <div class="month-change__text select__input" tabindex="0">Выберите месяц</div>  
+                  <div class="select__side">
+                    <div class="month-change__button month-change__button--open-list"></div>
+                  </div>
+                </div>
+                <button class="month-change__button month-change__button--next"></button>
+              </div>            
+            </div>
+            <div class="select__container select__container--change-month">
+              <div class="select__container-wrap select__container-wrap--month">
+                <div class="select__item select__item--month">Январь</div>
+                <div class="select__item select__item--month">Февраль</div>
+                <div class="select__item select__item--month">Март</div>
+                <div class="select__item select__item--month">Апрель</div>
+                <div class="select__item select__item--month">Май</div>
+                <div class="select__item select__item--month">Июнь</div>
+                <div class="select__item select__item--month">Июль</div>
+                <div class="select__item select__item--month">Август</div>
+                <div class="select__item select__item--month">Сентябрь</div>
+                <div class="select__item select__item--month">Октябрь</div>
+                <div class="select__item select__item--month">Ноябрь</div>
+                <div class="select__item select__item--month">Декабрь</div>
+              </div>
+            </div>
+          </div>
+          <div class="year-change">
+            <div class="year-change__wrapper">
+              <div class="year-change__content">
+                <button class="year-change__button year-change__button--prev"></button>
+                <div class="year-change__select select">
+                  <div class="select__side"></div>
+                  <input class="year-change__text  select__input" type="text" placeholder="Выберите год">  
+                  <div class="select__side">
+                    <div class="year-change__button year-change__button--open-list"></div>
+                  </div>
+                </div>
+                <button class="year-change__button year-change__button--next"></button>
+              </div>             
+            </div>
+            <div class="select__container select__container--change-year">
+              <div class="select__container-wrap select__container-wrap--year">
+                <div class="select__item select__item--year">2024</div>
+                <div class="select__item select__item--year">2023</div>
+                <div class="select__item select__item--year">2022</div>
+                <div class="select__item select__item--year">2021</div>
+                <div class="select__item select__item--year">2020</div>
+                <div class="select__item select__item--year">2019</div>
+                <div class="select__item select__item--year">2018</div>
+                <div class="select__item select__item--year">2017</div>
+                <div class="select__item select__item--year">2016</div>
+                <div class="select__item select__item--year">2015</div>
+                <div class="select__item select__item--year">2014</div>
+                <div class="select__item select__item--year">2013</div>
+                <div class="select__item select__item--year">2012</div>
+                <div class="select__item select__item--year">2011</div>
+                <div class="select__item select__item--year">2010</div>
+                <div class="select__item select__item--year">2009</div>
+                <div class="select__item select__item--year">2008</div>
+              </div>
+            </div>
+          </div>
+          <div class="days">
+            <div class="week-days-list">
+              <div class="day week-day">
+                <div class="number">Пн</div>
+              </div>
+              <div class="day week-day">
+                <div class="number">Вт</div>
+              </div>
+              <div class="day week-day">
+                <div class="number">Ср</div>
+              </div>
+              <div class="day week-day">
+                <div class="number">Чт</div>
+              </div>
+              <div class="day week-day">
+                <div class="number">Пт</div>
+              </div>
+              <div class="day week-day">
+                <div class="number">Сб</div>
+              </div>
+              <div class="day week-day">
+                <div class="number">Вс</div>
+              </div>
+            </div>
+            <div class="days-list">
+              <div class="day day--month">
+                <div class="number">1</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">2</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">3</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">4</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">5</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">6</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">7</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">8</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">9</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">10</div>
+              </div>
+              <div class="day day--month ">
+                <div class="number">11</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">12</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">13</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">14</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">15</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">16</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">17</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">18</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">19</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">20</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">21</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">22</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">23</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">24</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">25</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">26</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">27</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">28</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">29</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">30</div>
+              </div>
+              <div class="day day--month">
+                <div class="number">31</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="error-block hide-element">
+          <div class="error-block__wrapper">
+            <div class="error-message">Дата начала периода превышает дату окончания</div>
+          </div>
+        </div>
+      </div>
+      <div class="app__buttons">
+        <div class="app__buttons-wrapper">
+          <button class="app__button button-reset">Сбросить</button>
+          <button class="app__button button-apply">Применить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/script.js" type="module"></script>
+</body>
+
+</html>

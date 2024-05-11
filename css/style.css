@@ -1,0 +1,724 @@
+@import "fonts.css";
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 19px;
+  line-height: 22px;
+  text-align: center;
+  min-height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+button {
+  border: 1px solid transparent;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.focus-background {
+  background-color: #fff;
+}
+
+.active-background {
+  background-color: #D4F6FF;
+}
+
+.app {
+  opacity: 0;
+  position: relative;
+  background-color: #F1F1F1;
+}
+
+.app::after {
+  content: "";
+  padding-top: 83%;
+  display: block;
+}
+
+.app__wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar__container {
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.1));
+}
+
+.calendar {
+  width: calc((100% - 5px) / 2);
+  position: relative;
+}
+
+.date-change {
+  width: 100%;
+  position: relative;
+  border: 0.5px solid #969FA8;
+}
+
+.date-change__wrapper {
+  position: absolute;
+  margin: 5px;
+  top: 0;
+  left: 0;
+  display: flex;
+  gap: 5px;
+  width: calc(100% - 2* 5px);
+  height: calc(100% - 2* 5px);
+  justify-content: space-between;
+}
+
+.date-change::after {
+  content: "";
+  padding-top: calc((100% - 12px) / 7);
+  display: block;
+}
+
+.date-change__left {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 18px;
+}
+
+.date-change__right {
+  width: 15%;
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+.date-change__button {
+  width: 34px;
+  height: 34px;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  transition: all 0.5s ease;
+}
+
+.date-change__button--clear {
+  background-image: url('../assets/icons/close-blue.svg');
+}
+
+.date-change__right:focus,
+.date-change__right:hover {
+  background-color: #2879FF;
+  cursor: pointer;
+}
+
+.date-change__right:focus .date-change__button--clear,
+.date-change__right:hover .date-change__button--clear {
+  background-image: url('../assets/icons/close-hover.svg');
+}
+
+.date-change__text {
+  flex-shrink: 0;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #434C4E;
+  margin-right: 5px;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.date-change__input {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+  border: none;
+  text-transform: uppercase;
+  color: #000;
+  background-color: transparent;
+}
+
+.date-change__input::placeholder {
+  font-weight: normal;
+  color: #B2B4B4;
+}
+
+.sizer {
+  visibility: hidden;
+  text-transform: uppercase;
+  padding-left: 5px;
+  font-weight: bold;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip::before {
+  width: 180px;
+  position: absolute;
+  padding: 10px;
+  bottom: -220%;
+  right: -52%;
+  content: attr(data-tip);
+  background-color: #D4F6FF;
+  border: 1px solid #2879FF;
+  opacity: 0;
+  transition-property: opacity;
+  z-index: 99;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  bottom: -124%;
+  left: 50%;
+  opacity: 0;
+  border: 1px solid #2879FF;
+  display: block;
+  background-color: #D4F6FF;
+  transform: translateX(-50%) rotate(-45deg);
+  clip-path: polygon(0 0, 100% 100%, 100% 0);
+  z-index: 100;
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after {
+  opacity: 1;
+  transition-delay: 75ms;
+}
+
+.date-change__icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.year-change,
+.month-change {
+  position: relative;
+  background-color: #fff;
+  border: 0.5px solid #969FA8;
+}
+
+.year-change__wrapper::after,
+.month-change__wrapper::after {
+  content: "";
+  padding-top: calc(100% / 7);
+  display: block;
+}
+
+.year-change__wrapper,
+.month-change__wrapper {
+  width: 100%;
+  position: relative;
+}
+
+.year-change__content,
+.month-change__content {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.year-change__button,
+.month-change__button {
+  width: 5%;
+  padding-top: 5%;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.year-change__button--prev,
+.month-change__button--prev {
+  background-image: url("../assets/icons/arrow-left.svg");
+}
+
+.year-change__button--next,
+.month-change__button--next {
+  background-image: url("../assets/icons/arrow-right.svg");
+}
+
+.month-change__button--open-list,
+.year-change__button--open-list {
+  width: 30%;
+  padding-top: 30%;
+  background-image: url("../assets/icons/arrow-down.svg");
+}
+
+.month-change__button--prev:disabled,
+.month-change__button--next:disabled,
+.year-change__button--prev:disabled,
+.year-change__button--next:disabled {
+  opacity: .5;
+  cursor: default;
+}
+
+.year-change__text,
+.month-change__text {
+  color: #2961FE;
+  padding-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.year-change__text {
+  width: 160px;
+}
+
+.select {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.select__side {
+  width: 30%;
+}
+
+.popup-mobile {
+  display: none;
+}
+
+.select__input {
+  width: 100%;
+  text-align: center;
+  border: none;
+}
+
+.select__input::placeholder {
+  color: #2961FE;
+  text-align: center;
+}
+
+.select__input:focus,
+.select__input:hover {
+  outline: 0;
+}
+
+.select__container {
+  width: 100%;
+  height: auto;
+  top: 100%;
+  left: 0;
+  position: absolute;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  transition-duration: 400ms;
+  background: #fff;
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+.select__container--change-year,
+.select__container--change-month {
+  padding: 10px;
+}
+
+.select__container--change-year {
+  overflow: auto;
+}
+
+.select__container-wrap--year {
+  overflow: auto;
+}
+
+.select__container--open {
+  width: 100%;
+  /* height: auto; */
+  height: 800%;
+  z-index: 1000;
+  transform: scaleY(1);
+}
+
+.select__container-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.select__item {
+  padding: 14px;
+  color: #2961FE;
+  background-color: #fff;
+  border: 0.5px solid #969FA8;
+}
+
+.select__item--year {
+  width: calc((100% - 3 * 15px) / 4);
+}
+
+.select__item--month {
+  width: calc((100% - 1 * 15px) / 2);
+}
+
+.select__item:focus,
+.select__item:hover {
+  transition: all .2s ease;
+  background-color: #EFF0F0;
+  cursor: pointer;
+}
+
+.week-days-list {
+  display: flex;
+}
+
+.days {
+  background-color: #fff;
+}
+
+.days-list {
+  --first-day: 1;
+  --last-day: 4;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.days-list::before {
+  content: "";
+  width: calc(100% / 7 * var(--first-day));
+  border: 0.5px solid #969FA8;
+  background-color: #fff;
+}
+
+.days-list::after {
+  content: "";
+  width: calc(100% / 7 * (7 - var(--last-day)));
+  border: 0.5px solid #969FA8;
+  background-color: #fff;
+}
+
+.days-list--hide-before::before {
+  display: none;
+}
+
+.days-list--hide-after::after {
+  display: none;
+}
+
+.day {
+  position: relative;
+  width: calc(100% / 7);
+  border: 0.5px solid #969FA8;
+}
+
+.day::before {
+  content: "";
+  padding-top: 100%;
+  display: block;
+}
+
+.number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.day--month {
+  color: #6CA3FE;
+  background-color: #F6F6F6;
+}
+
+.day--selected {
+  color: #fff;
+  background-color: #2961FE;
+}
+
+.day--interval {
+  color: #2961FE;
+  background-color: #D4F6FF;
+}
+
+.day--empty {
+  background-color: #fff;
+}
+
+.week-day {
+  background-color: #fff;
+  color: #000;
+}
+
+.app__buttons {
+  width: 100%;
+  background-color: #F6F6F6;
+  display: flex;
+  justify-content: flex-end;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.app__buttons::after {
+  content: "";
+  padding-top: calc((100% - 5px) / 14);
+  display: block;
+}
+
+.app__buttons-wrapper {
+  align-self: flex-end;
+  display: flex;
+  margin: 20px;
+}
+
+.app__button {
+  padding: 5px;
+}
+
+.button-reset {
+  color: #B2B4B4;
+  background: transparent;
+}
+
+.button-apply {
+  color: #fff;
+  background-color: #B2B4B4;
+}
+
+.button-reset--active {
+  color: #2879FF;
+  background: transparent;
+}
+
+.button-apply--active {
+  color: #fff;
+  background-color: #2879FF;
+}
+
+.error-block__wrapper {
+  width: 100%;
+  padding: 5px;
+  padding-left: 35px;
+  background-image: url('../assets/icons/icon-delete-circle.svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 26px 26px;
+}
+
+.error-message {
+  text-align: left;
+  color: #C80000;
+}
+
+@media(max-aspect-ratio: 1) {
+  .app {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .app::after {
+    display: none;
+  }
+
+  .app__wrapper {
+    height: 100%;
+  }
+
+  .calendar__container {
+    height: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    flex-wrap: nowrap;
+  }
+
+  .popup-mobile {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .calendar {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .select__container {
+    top: 0;
+  }
+
+  .select__container--change-year::before {
+    content: "";
+    width: 100%;
+    padding-top: calc(100% /7);
+    pointer-events: none;
+    display: block;
+  }
+
+  .select__container--open {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .select__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .select__container--change-month {
+    gap: 20px;
+  }
+
+  .select__item--month {
+    width: calc((100% - 2 * 20px) / 3);
+  }
+
+  .year-change__wrapper--select {
+    z-index: 10000;
+  }
+
+  .year-change__button--back {
+    width: 27px;
+    height: 16px;
+    background-image: url('../assets/icons/arrow-back.svg');
+  }
+
+  .year-change__button--close {
+    width: 24px;
+    height: 24px;
+    background-image: url('../assets/icons/close-mobile.svg');
+  }
+
+  .days {
+    overflow: auto;
+    height: 100%;
+  }
+
+  .app__buttons {
+    box-shadow: none;
+  }
+
+  .app__buttons::after {
+    display: none;
+  }
+
+  .app__buttons-wrapper {
+    width: 100%;
+    flex-direction: column-reverse;
+    margin: 0;
+    gap: 5px;
+  }
+
+  .app__button {
+    width: 100%;
+  }
+
+  .mobile-active-popup {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .auto-height {
+    height: auto;
+  }
+
+  .mobile-hidden {
+    display: none;
+  }
+}
+
+@media(max-width: 799px) {
+  .select__item--year {
+    width: calc((100% - 2* 15px) / 3);
+}
+}
+
+@media(max-width: 399px) {
+  .date {
+    display: none;
+  }
+
+  .date-change__left {
+    padding: 4px;
+  }
+
+  .date-change__icon {
+    display: none;
+  }
+
+  .select__side {
+    width: 20%;
+  }
+
+  .select__item--month {
+    width: calc((100% - 20px) / 2);
+  }
+
+  .select__item--year {
+    width: calc((100% - 2* 15px) / 3);
+}
+}
+
+
+.hide-element {
+  display: none;
+}
+
+.hidden-element {
+  visibility: hidden;
+}
