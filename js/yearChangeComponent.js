@@ -100,6 +100,12 @@ function yearChangeComponent(rootElement, appState, state) {
       rootElement.classList.add('hide-element');
     }
 
+    if (state.month == -1 || !state.isOpened) {
+      rootElement.classList.add('date-change--border-bottom');
+    } else {
+      rootElement.classList.remove('date-change--border-bottom');
+    } 
+
     selectInputYear.value = (state.year != -1) ? state.year : '';
     const currentYear = new Date().getFullYear();
     if (state.year == currentYear) {

@@ -72,6 +72,9 @@ window.onresize = () => {
     const scale = calendarHeight / height;
     const resultWidth = Math.min(width / scale, width);
     app.style.width = resultWidth + 'px';
+    document.body.style['font-size'] = (19 / window.devicePixelRatio) + 'px';
+    document.body.style['line-height'] = (22 / window.devicePixelRatio) + 'px';
+    document.body.style.setProperty('--base-size', (1 / window.devicePixelRatio));
   }
 }
 window.onresize();

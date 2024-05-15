@@ -86,6 +86,12 @@ function dateChangeComponent(rootElement, appState, state) {
       dateChange.classList.remove('focus-background');
     }
 
+    if (!state.isOpened) {
+      dateChange.classList.add('date-change--border-bottom');
+    } else {
+      dateChange.classList.remove('date-change--border-bottom');
+    }    
+
     if (isFilled && !state.isOpened) {
       dateChangeLeft.classList.add('active-background');
       dateChangeRight.classList.remove('hide-element');

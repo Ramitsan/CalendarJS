@@ -63,11 +63,27 @@ function daysComponent(rootElement, appState, state) {
     const lastDay = (firstDay + monthDays) % 7;
     daysList.style.setProperty('--last-day', lastDay);
 
+    if (lastDay == 0) {
+      daysList.classList.add('days-list--hide-after');
+    } else {
+      daysList.classList.remove('days-list--hide-after');
+    }
+
     [...daysList.children].forEach((item, index) => {
       if (index >= monthDays) {
         item.style.display = 'none';
       } else {
         item.style.display = '';
+      }
+      if((index + firstDay + 1) % 7 == 0) {
+        item.classList.add('day--sunday');
+      } else {
+        item.classList.remove('day--sunday');
+      }
+      if(index >= (monthDays - (lastDay || 7))) {
+        item.classList.add('day--last-week');
+      } else {
+        item.classList.remove('day--last-week');
       }
     });
 
