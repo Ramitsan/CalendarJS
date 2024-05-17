@@ -103,6 +103,12 @@ function dateChangeComponent(rootElement, appState, state) {
       dateChangeRight.classList.remove('active-background');
       dateChangeDots.forEach(dot => dot.classList.remove('hide-element'));
     }
+
+    if(state.year != -1 || state.month != -1 || state.day != -1) {
+      dateChangeRight.classList.remove('hide-element');
+    } else {
+      dateChangeRight.classList.add('hide-element');
+    }
   })
 
   dateChangeButtonClear.onclick = (evt) => {

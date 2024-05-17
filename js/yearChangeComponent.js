@@ -16,20 +16,23 @@ function yearChangeComponent(rootElement, appState, state) {
     selectContainerWrapYear.innerHTML += `<div class="select__item select__item--year">${it}</div>`;
   })
 
-  yearChangeButtonPrev.onclick = () => {
+  yearChangeButtonPrev.onclick = (evt) => {
+    evt.stopPropagation();
     if (state.year > 0) {
       state.year--;
     }
   }
 
-  yearChangeButtonNext.onclick = () => {
+  yearChangeButtonNext.onclick = (evt) => {
+    evt.stopPropagation();
     if (state.year < baseYear) {
       state.year++;
     }
   }
 
   [...selectContainerWrapYear.children].forEach((item, index) => {
-    item.onclick = () => {
+    item.onclick = (evt) => {
+      evt.stopPropagation();
       state.year = baseYear - index;
       appState.activePopup = '';
     }
@@ -61,18 +64,18 @@ function yearChangeComponent(rootElement, appState, state) {
     onBlur: (valueText) => {
       const value = valueText === '' ? -1 : (Number(valueText));
       state.year = Number.isNaN(value) ? state.year : value;
-      yearChangeButtonPrev.classList.remove('hidden-element');
-      yearChangeButtonNext.classList.remove('hidden-element');
+      // yearChangeButtonPrev.classList.remove('hidden-element');
+      // yearChangeButtonNext.classList.remove('hidden-element');
     },
     onFocus: (valueText) => {
-      yearChangeButtonPrev.classList.add('hidden-element');
-      yearChangeButtonNext.classList.add('hidden-element');
-      appState.activeCalendar = state.calendarName;
-      appState.activePopup = 'years';
+      // yearChangeButtonPrev.classList.add('hidden-element');
+      // yearChangeButtonNext.classList.add('hidden-element');
+      // appState.activeCalendar = state.calendarName;
+      // appState.activePopup = 'years';
     }
   });
 
-  yearChangeButtonOpenList.onclick = () => {
+  rootElement.onclick = () => {
     if (appState.activePopup == 'years' && appState.activeCalendar == state.calendarName) {
       appState.activePopup = '';
     } else {
@@ -91,6 +94,14 @@ function yearChangeComponent(rootElement, appState, state) {
       yearChangeWrapper.classList.remove('year-change__wrapper--select');
       rootElement.classList.remove('mobile-active-popup');
     }
+
+    if(state.year == -1 || (appState.activePopup == 'years' && appState.activeCalendar == state.calendarName)) {
+      yearChangeButtonPrev.classList.add('hidden-element');
+      yearChangeButtonNext.classList.add('hidden-element');
+    } else {
+      yearChangeButtonPrev.classList.remove('hidden-element');
+      yearChangeButtonNext.classList.remove('hidden-element');
+    }
   })
 
   state.onChange.add(() => {
@@ -105,6 +116,8 @@ function yearChangeComponent(rootElement, appState, state) {
     } else {
       rootElement.classList.remove('date-change--border-bottom');
     } 
+
+    
 
     selectInputYear.value = (state.year != -1) ? state.year : '';
     const currentYear = new Date().getFullYear();

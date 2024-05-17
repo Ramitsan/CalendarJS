@@ -203,6 +203,8 @@ button {
   color: #B2B4B4;
 }
 
+
+
 .sizer {
   visibility: hidden;
   text-transform: uppercase;
@@ -249,6 +251,12 @@ button {
 .tooltip:hover::after {
   opacity: 1;
   transition-delay: 75ms;
+}
+
+.date-change__icon {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .date-change__icon img {
@@ -345,11 +353,14 @@ button {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .select__side {
   width: 30%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .popup-mobile {
@@ -389,6 +400,7 @@ button {
 .select__container--change-year,
 .select__container--change-month {
   padding: calc(10px * var(--base-size));
+  z-index: 1;
 }
 
 .select__container--change-year {
@@ -402,7 +414,6 @@ button {
 .select__container--open {
   width: 100%;
   height: 800%;
-  z-index: 1000;
   transform: scaleY(1);
 }
 
@@ -414,6 +425,9 @@ button {
 }
 
 .select__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: calc(14px * var(--base-size));
   color: #2961FE;
   background-color: #fff;
@@ -425,7 +439,7 @@ button {
 }
 
 .select__item--month {
-  width: calc((100% - 1 * var(--gap)) / 2);
+  width: calc((100% - 2 * var(--gap)) / 3);
 }
 
 .select__item:focus,
@@ -749,4 +763,5 @@ button {
 
 .hidden-element {
   visibility: hidden;
+  pointer-events: none;
 }

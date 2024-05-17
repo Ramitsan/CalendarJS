@@ -8,26 +8,29 @@ function monthChangeComponent(rootElement, appState, state) {
   const monthChangeButtonNext = rootElement.querySelector('.month-change__button--next');
   const monthChangeButtonOpenList = rootElement.querySelector('.month-change__button--open-list');
 
-  monthChangeButtonPrev.onclick = () => {
+  monthChangeButtonPrev.onclick = (evt) => {
+    evt.stopPropagation();
     if (state.month > 0) {
       state.month--;
     }
   }
 
-  monthChangeButtonNext.onclick = () => {
+  monthChangeButtonNext.onclick = (evt) => {
+    evt.stopPropagation();
     if (state.month < 11) {
       state.month++;
     }
   }
 
   [...selectContainerWrap.children].forEach((item, index) => {
-    item.onclick = () => {
+    item.onclick = (evt) => {
+      evt.stopPropagation();
       state.month = index;
       appState.activePopup = '';
     }
   });
 
-  monthChangeButtonOpenList.onclick = () => {
+  rootElement.onclick = () => {
     if (appState.activePopup == 'months' && appState.activeCalendar == state.calendarName) {
       appState.activePopup = '';
     } else {
@@ -38,10 +41,10 @@ function monthChangeComponent(rootElement, appState, state) {
 
   selectInputMonth.onblur = () => { },
 
-    selectInputMonth.onfocus = () => {
-      appState.activeCalendar = state.calendarName;
-      appState.activePopup = 'months';
-    }
+    // selectInputMonth.onfocus = () => {
+    //   appState.activeCalendar = state.calendarName;
+    //   appState.activePopup = 'months';
+    // }
 
   appState.onChange.add(() => {
     if (appState.activePopup == 'months' && appState.activeCalendar == state.calendarName) {
@@ -59,6 +62,15 @@ function monthChangeComponent(rootElement, appState, state) {
     } else {
       rootElement.classList.add('hide-element');
     }
+
+    if(state.month == -1) {
+      monthChangeButtonPrev.classList.add('hidden-element');
+      monthChangeButtonNext.classList.add('hidden-element');
+    } else {
+      monthChangeButtonPrev.classList.remove('hidden-element');
+      monthChangeButtonNext.classList.remove('hidden-element');
+    }
+
 
     selectInputMonth.textContent = (state.month != -1) ? monthsNames[state.month] : 'Выберите месяц';
     if (state.month == 0) {
