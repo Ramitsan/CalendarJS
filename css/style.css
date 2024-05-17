@@ -194,6 +194,8 @@ button {
   text-transform: uppercase;
   color: #000;
   background-color: transparent;
+  padding-left: calc(5px * var(--base-size));
+  padding-right: calc(5px * var(--base-size));
 }
 
 .date-change__input::placeholder {
@@ -205,6 +207,7 @@ button {
   visibility: hidden;
   text-transform: uppercase;
   padding-left: calc(5px * var(--base-size));
+  padding-right: calc(5px * var(--base-size));
   font-weight: bold;
 }
 
