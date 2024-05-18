@@ -120,7 +120,7 @@ button {
 
 .date-change::after {
   content: "";
-  padding-top: calc((100% - 12px) / 7);
+  padding-top: calc((100% - 6px) / 7);
   display: block;
 }
 
@@ -276,7 +276,7 @@ button {
 .year-change__wrapper::after,
 .month-change__wrapper::after {
   content: "";
-  padding-top: calc(100% / 7);
+  padding-top: calc((100% - 6px) / 7);
   display: block;
 }
 
