@@ -8,7 +8,8 @@
 
 body {
   --base-size: 1px;
-  min-width: 320px;
+  --border-width: 0.2px;
+  /* min-width: 320px; */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -43,7 +44,9 @@ img {
 }
 
 button {
-  border: 1px solid transparent;
+  margin: 0;
+  padding: 0;
+  border: var(--border-width) solid transparent;
   vertical-align: middle;
   cursor: pointer;
 }
@@ -97,30 +100,37 @@ button {
 .date-change {
   width: 100%;
   position: relative;
-  border: 0.5px solid #969FA8;
-  border-bottom: none;
+  background-color: #F6F6F6;  
 }
 
-.date-change--border-bottom {
-  border-bottom: 0.5px solid #969FA8;
+.date-change__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: var(--border-width) solid #969FA8;
+  border-bottom: none;
 }
 
 .date-change__wrapper {
   --margin: calc(5px * var(--base-size));
-  position: absolute;
-  margin: var(--margin);
-  top: 0;
-  left: 0;
+  margin: var(--margin); 
   display: flex;
   gap: var(--margin);
   width: calc(100% - 2* var(--margin));
   height: calc(100% - 2* var(--margin));
-  justify-content: space-between;
+  justify-content: space-between;  
+}
+
+.date-change--border-bottom .date-change__content,
+.date-change--border-bottom .year-change__content {
+  border-bottom: var(--border-width) solid #969FA8;
 }
 
 .date-change::after {
   content: "";
-  padding-top: calc((100% - 6px) / 7);
+  padding-top: calc(100% / 7);
   display: block;
 }
 
@@ -142,13 +152,15 @@ button {
 }
 
 .date-change__button {
+  padding: 0;
+  margin: 0;
   width: calc(34px * var(--base-size));
   height: calc(34px * var(--base-size));
   background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
   background-size: calc(24px * var(--base-size)) calc(24px * var(--base-size));
-  transition: all 0.5s ease;
+  transition: background-color 0.5s ease;
 }
 
 .date-change__button--clear {
@@ -198,12 +210,14 @@ button {
   padding-right: calc(5px * var(--base-size));
 }
 
+.date-change__input:focus {
+  outline: none;
+}
+
 .date-change__input::placeholder {
   font-weight: normal;
   color: #B2B4B4;
 }
-
-
 
 .sizer {
   visibility: hidden;
@@ -225,10 +239,11 @@ button {
   right: -52%;
   content: attr(data-tip);
   background-color: #D4F6FF;
-  border: 1px solid #2879FF;
+  border: var(--border-width) solid #2879FF;
   opacity: 0;
   transition-property: opacity;
   z-index: 99;
+  pointer-events: none;
 }
 
 .tooltip::after {
@@ -239,7 +254,7 @@ button {
   bottom: -124%;
   left: 50%;
   opacity: 0;
-  border: 1px solid #2879FF;
+  border: var(--border-width) solid #2879FF;
   display: block;
   background-color: #D4F6FF;
   transform: translateX(-50%) rotate(-45deg);
@@ -268,15 +283,13 @@ button {
 .month-change {
   position: relative;
   background-color: #fff;
-  border-top: 0.5px solid #969FA8;
-  border-left: 0.5px solid #969FA8;
-  border-right: 0.5px solid #969FA8;
+ 
 }
 
 .year-change__wrapper::after,
 .month-change__wrapper::after {
   content: "";
-  padding-top: calc((100% - 6px) / 7);
+  padding-top: calc(100% / 7);
   display: block;
 }
 
@@ -299,6 +312,9 @@ button {
   justify-content: space-between;
   padding: calc(10px * var(--base-size));
   background-color: #fff;
+  border-top: var(--border-width) solid #969FA8;
+  border-left: var(--border-width) solid #969FA8;
+  border-right: var(--border-width) solid #969FA8;
 }
 
 .year-change__button,
@@ -431,7 +447,7 @@ button {
   padding: calc(14px * var(--base-size));
   color: #2961FE;
   background-color: #fff;
-  border: 0.5px solid #969FA8;
+  border: var(--border-width) solid #969FA8;
 }
 
 .select__item--year {
@@ -467,15 +483,15 @@ button {
 .days-list::before {
   content: "";
   width: calc(100% / 7 * var(--first-day));
-  border-top: 0.5px solid #969FA8;
-  border-left: 0.5px solid #969FA8;
+  border-top: var(--border-width) solid #969FA8;
+  border-left: var(--border-width) solid #969FA8;
   background-color: #fff;
 }
 
 .days-list::after {
   content: "";
   width: calc(100% / 7 * (7 - var(--last-day)));
-  border: 0.5px solid #969FA8;
+  border: var(--border-width) solid #969FA8;
   background-color: #fff;
 }
 
@@ -489,9 +505,7 @@ button {
 
 .day {
   position: relative;
-  width: calc(100% / 7);
-  border-top: 0.5px solid #969FA8;
-  border-left: 0.5px solid #969FA8;
+  width: calc(100% / 7); 
 }
 
 .day::before {
@@ -500,19 +514,25 @@ button {
   display: block;
 }
 
-.day--sunday {
-  border-right: 0.5px solid #969FA8;
+.day--sunday .number {
+  border-right: var(--border-width) solid #969FA8;
 }
 
-.day--last-week {
-  border-bottom: 0.5px solid #969FA8;
+.day--last-week .number {
+  border-bottom: var(--border-width) solid #969FA8;
 }
 
 .number {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  border-top: var(--border-width) solid #969FA8;
+  border-left: var(--border-width) solid #969FA8;
 }
 
 .day--month {
@@ -727,23 +747,23 @@ button {
 @media(max-width: 799px) {
   .select__item--year {
     width: calc((100% - 2* var(--gap)) / 3);
-}
+  }
 }
 
 @media(max-width: 399px) {
-  .date {
+  /* .date {
     display: none;
-  }
+  } */
 
-  .date-change__left {
+  /* .date-change__left {
     padding: calc(4px * var(--base-size));
-  }
+  } */
 
-  .date-change__icon {
+  /* .date-change__icon {
     display: none;
-  }
+  } */
 
-  .select__side {
+  /* .select__side {
     width: 20%;
   }
 
@@ -753,7 +773,7 @@ button {
 
   .select__item--year {
     width: calc((100% - 2* var(--gap)) / 3);
-}
+} */
 }
 
 
