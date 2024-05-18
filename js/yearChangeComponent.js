@@ -1,4 +1,5 @@
 import inputComponent from './inputComponent.js';
+import { checkParent } from './utils.js';
 
 function yearChangeComponent(rootElement, appState, state) {
   const yearChangeWrapper = rootElement.querySelector('.year-change__wrapper');
@@ -28,6 +29,12 @@ function yearChangeComponent(rootElement, appState, state) {
     if (state.year < baseYear) {
       state.year++;
     }
+  }
+
+  const close = (evt) => {
+    if(!checkParent(evt.target, rootElement)) {
+      appState.activePopup = '';      
+    }    
   }
 
   [...selectContainerWrapYear.children].forEach((item, index) => {
@@ -89,10 +96,12 @@ function yearChangeComponent(rootElement, appState, state) {
       selectContainerYear.classList.add('select__container--open');
       yearChangeWrapper.classList.add('year-change__wrapper--select');
       rootElement.classList.add('mobile-active-popup');
+      window.addEventListener('click', close, true);
     } else {
       selectContainerYear.classList.remove('select__container--open');
       yearChangeWrapper.classList.remove('year-change__wrapper--select');
       rootElement.classList.remove('mobile-active-popup');
+      window.removeEventListener('click', close, true);
     }
 
     if(state.year == -1 || (appState.activePopup == 'years' && appState.activeCalendar == state.calendarName)) {

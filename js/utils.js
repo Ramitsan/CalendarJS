@@ -8,4 +8,14 @@ const addZero = (value) => {
   return '' + value;
 }
 
-export {monthsNames, monthsNames2, addZero};
+const checkParent = (el, parent)=>{
+  if( el!= parent){
+      if (!el.parentNode){
+          return false;
+      }
+      return checkParent(el.parentNode, parent);
+  }
+  return true;
+}
+
+export {monthsNames, monthsNames2, addZero, checkParent};

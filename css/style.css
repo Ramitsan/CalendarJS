@@ -429,7 +429,7 @@ button {
 
 .select__container--open {
   width: 100%;
-  height: 800%;
+  height: 730%;
   transform: scaleY(1);
 }
 
@@ -565,7 +565,7 @@ button {
   display: flex;
   justify-content: flex-end;
   box-shadow: 0px calc(4px * var(--base-size)) calc(15px * var(--base-size)) rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  /* z-index: 1000; */
 }
 
 .app__buttons::after {

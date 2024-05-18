@@ -1,4 +1,4 @@
-import { monthsNames } from './utils.js';
+import { monthsNames, checkParent } from './utils.js';
 
 function monthChangeComponent(rootElement, appState, state) {
   const selectInputMonth = rootElement.querySelector('.select__input');
@@ -20,6 +20,12 @@ function monthChangeComponent(rootElement, appState, state) {
     if (state.month < 11) {
       state.month++;
     }
+  }
+
+  const close = (evt) => {
+    if(!checkParent(evt.target, rootElement)) {
+      appState.activePopup = '';      
+    }    
   }
 
   [...selectContainerWrap.children].forEach((item, index) => {
@@ -50,9 +56,11 @@ function monthChangeComponent(rootElement, appState, state) {
     if (appState.activePopup == 'months' && appState.activeCalendar == state.calendarName) {
       selectContainerMonth.classList.add('select__container--open');
       rootElement.classList.add('mobile-active-popup');
+      window.addEventListener('click', close, true);
     } else {
       selectContainerMonth.classList.remove('select__container--open');
       rootElement.classList.remove('mobile-active-popup');
+      window.removeEventListener('click', close, true);
     }
   })
 
