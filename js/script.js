@@ -62,25 +62,44 @@ const app = document.querySelector('.app');
 
 window.onresize = () => {
   const isMobile = matchMedia('(max-aspect-ratio: 1)').matches;
+  document.documentElement.style.overflow = 'hidden';
+  document.documentElement.style.height = '100vh';
+  const height = document.documentElement.getBoundingClientRect().height;
+  const width = document.documentElement.getBoundingClientRect().width;
+  document.documentElement.style.overflow = '';
+  document.documentElement.style.height = '';
+
+  let mediaWidth = width;
+  let mediaPixelRatio = window.devicePixelRatio;
   if (isMobile) {
     app.style.width = '';
+    mediaPixelRatio = 1;
   } else {
     const aspect = 1 / 0.83;
-    document.documentElement.style.overflow = 'hidden';
-    document.documentElement.style.height = '100vh';
-    const height = document.documentElement.getBoundingClientRect().height;
-    const width = document.documentElement.getBoundingClientRect().width;
+   
     // const height = window.innerHeight;
     // const width = window.innerWidth;
     const calendarHeight = width / aspect;
     const scale = calendarHeight / height;
     const resultWidth = Math.min(width / scale, width);
     app.style.width = resultWidth + 'px';
-    document.body.style['font-size'] = (19 / window.devicePixelRatio) + 'px';
-    document.body.style['line-height'] = (22 / window.devicePixelRatio) + 'px';
-    document.body.style.setProperty('--base-size', (1 / window.devicePixelRatio));
-    document.documentElement.style.overflow = '';
-    document.documentElement.style.height = '';
+    mediaWidth = resultWidth / 2;
+  }
+  document.body.style['font-size'] = (19 / mediaPixelRatio) + 'px';
+  document.body.style['line-height'] = (22 / mediaPixelRatio) + 'px';
+  document.body.style.setProperty('--base-size', (1 / mediaPixelRatio));
+  
+  const realWidth = mediaWidth * mediaPixelRatio;
+
+  if (realWidth<=799){
+    document.body.classList.add('media-max-width-799');
+  } else {
+    document.body.classList.remove('media-max-width-799');
+  }
+  if (realWidth<=399){
+    document.body.classList.add('media-max-width-399');
+  } else {
+    document.body.classList.remove('media-max-width-399');
   }
 }
 window.onresize();
