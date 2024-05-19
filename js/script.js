@@ -66,8 +66,12 @@ window.onresize = () => {
     app.style.width = '';
   } else {
     const aspect = 1 / 0.83;
-    const height = window.innerHeight;
-    const width = window.innerWidth;
+    document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.height = '100vh';
+    const height = document.documentElement.getBoundingClientRect().height;
+    const width = document.documentElement.getBoundingClientRect().width;
+    // const height = window.innerHeight;
+    // const width = window.innerWidth;
     const calendarHeight = width / aspect;
     const scale = calendarHeight / height;
     const resultWidth = Math.min(width / scale, width);
@@ -75,6 +79,8 @@ window.onresize = () => {
     document.body.style['font-size'] = (19 / window.devicePixelRatio) + 'px';
     document.body.style['line-height'] = (22 / window.devicePixelRatio) + 'px';
     document.body.style.setProperty('--base-size', (1 / window.devicePixelRatio));
+    document.documentElement.style.overflow = '';
+    document.documentElement.style.height = '';
   }
 }
 window.onresize();
